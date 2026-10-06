@@ -83,3 +83,122 @@
 <script src="script.js"></script>
 </body>
 </html>
+let balance = 100000;
+
+const balanceElement = document.getElementById("balance");
+const historyElement = document.getElementById("history");
+
+function formatMoney(amount) {
+    return amount.toLocaleString("ru-RU") + " ₸";
+}
+
+function updateBalance() {
+    balanceElement.textContent = formatMoney(balance);
+}
+
+function addHistory(text, amount, type) {
+    const li = document.createElement("li");
+
+    const description = document.createElement("span");
+    description.textContent = text;
+
+    const value = document.createElement("strong");
+    value.textContent =
+        (amount >= 0 ? "+" : "") + formatMoney(amount);
+
+    value.className = type;
+
+    li.appendChild(description);
+    li.appendChild(value);
+
+    historyElement.prepend(li);
+}
+
+function deposit() {
+    const input = document.getElementById("depositAmount");
+    const amount = Number(input.value);
+
+    if (amount <= 0) {
+        alert("Введите корректную сумму.");
+        return;
+    }
+
+    balance += amount;
+
+    updateBalance();
+
+    addHistory(
+        "Пополнение счёта",
+        amount,
+        "positive"
+    );
+
+    input.value = "";
+}
+
+function withdraw() {
+    const input = document.getElementById("withdrawAmount");
+    const amount = Number(input.value);
+
+    if (amount <= 0) {
+        alert("Введите корректную сумму.");
+        return;
+    }
+
+    if (amount > balance) {
+        alert("Недостаточно средств.");
+        return;
+    }
+
+    balance -= amount;
+
+    updateBalance();
+
+    addHistory(
+        "Снятие наличных",
+        -amount,
+        "negative"
+    );
+
+    input.value = "";
+}
+
+function transfer() {
+    const recipientInput = document.getElementById("recipient");
+    const amountInput = document.getElementById("transferAmount");
+
+    const recipient = recipientInput.value.trim();
+    const amount = Number(amountInput.value);
+
+    if (!recipient) {
+        alert("Введите номер счёта получателя.");
+        return;
+    }
+
+    if (amount <= 0) {
+        alert("Введите корректную сумму.");
+        return;
+    }
+
+    if (amount > balance) {
+        alert("Недостаточно средств.");
+        return;
+    }
+
+    balance -= amount;
+
+    updateBalance();
+
+    addHistory(
+        `Перевод на счёт ${recipient}`,
+        -amount,
+        "negative"
+    );
+
+    recipientInput.value = "";
+    amountInput.value = "";
+
+    alert("Перевод успешно выполнен!");
+}
+
+updateBalance();
