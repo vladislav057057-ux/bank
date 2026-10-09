@@ -45,7 +45,7 @@
 
         .balance-card {
             background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-            color: white;
+            color: yellow;
         }
 
         .balance-card h2 {
@@ -142,7 +142,7 @@
         <section class="card balance-card">
             <p>Текущий баланс</p>
             <h2 id="balance">100 000 ₸</h2>
-            <span>Счёт: KZ00 0000 0000 0000</span>
+            <span>Счёт: KZ00 1111 0000 0000</span>
         </section>
 
         <section class="actions">
