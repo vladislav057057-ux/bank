@@ -36,7 +36,7 @@
         }
 
         .card {
-            background: white;
+            background: green;
             padding: 25px;
             border-radius: 18px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
@@ -103,11 +103,11 @@
         }
 
         .positive {
-            color: #16a34a;
+            color: black;
         }
 
         .negative {
-            color: #dc2626;
+            color: yellow;
         }
 
         footer {
